@@ -34,7 +34,8 @@ audio_engine = AudioEmotionEngine()
 engagement_scorer = CounsellingEngagementScorer()
 
 # Load evaluation benchmarks
-benchmark_file = os.path.join(Config.BASE_DIR, 'data', 'evaluation_benchmarks.json')
+base_dir = getattr(Config, 'BASE_DIR', os.path.abspath(os.path.dirname(__file__)))
+benchmark_file = os.path.join(base_dir, 'data', 'evaluation_benchmarks.json')
 if os.path.exists(benchmark_file):
     with open(benchmark_file, 'r', encoding='utf-8') as f:
         benchmarks_data = json.load(f)

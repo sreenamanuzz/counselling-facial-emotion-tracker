@@ -3,6 +3,7 @@ import os
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
 class Config:
+    BASE_DIR = BASE_DIR
     SECRET_KEY = os.environ.get('SECRET_KEY', 'counselling-emotion-tracker-secret-key-2026')
     DATABASE = os.path.join(BASE_DIR, 'counselling_engagement.db')
     UPLOAD_FOLDER = os.path.join(BASE_DIR, 'static', 'uploads')
