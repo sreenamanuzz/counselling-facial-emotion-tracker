@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="300" height="300">
+  <defs>
+    <radialGradient id="sadGrad" cx="50%" cy="45%" r="50%">
+      <stop offset="0%" stop-color="#e0e7ff" />
+      <stop offset="100%" stop-color="#a5b4fc" />
+    </radialGradient>
+  </defs>
+  <rect width="100%" height="100%" fill="#1e1e2d" rx="20"/>
+  <circle cx="150" cy="150" r="105" fill="url(#sadGrad)" stroke="#6366f1" stroke-width="4"/>
+  <!-- Inner Raised Eyebrows (Medial Frontalis AU1) -->
+  <path d="M 85 130 L 132 115" stroke="#312e81" stroke-width="5" stroke-linecap="round" />
+  <path d="M 215 130 L 168 115" stroke="#312e81" stroke-width="5" stroke-linecap="round" />
+  <!-- Downcast Sad Eyes -->
+  <ellipse cx="108" cy="152" rx="12" ry="10" fill="#312e81" />
+  <ellipse cx="192" cy="152" rx="12" ry="10" fill="#312e81" />
+  <!-- Teardrop -->
+  <path d="M 98 165 C 98 165, 90 178, 90 184 A 6 6 0 1 0 102 184 C 102 178, 98 165, 98 165 Z" fill="#38bdf8" />
+  <!-- Down-turned Frown Mouth (Depressor Anguli Oris AU15) -->
+  <path d="M 108 214 Q 150 188 192 214" stroke="#312e81" stroke-width="6" fill="none" stroke-linecap="round" />
+  <text x="150" y="280" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#818cf8" text-anchor="middle">EMOTION: SAD (AU1+AU15)</text>
+</svg>

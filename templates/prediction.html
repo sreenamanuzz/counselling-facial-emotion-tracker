@@ -1,0 +1,229 @@
+{% extends "base.html" %}
+
+{% block title %}Prediction &amp; XAI Analysis - Counselling Engagement{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <!-- Breadcrumb & Top Bar -->
+  <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-2">
+    <div>
+      <span class="badge bg-primary bg-opacity-25 text-info border border-primary px-3 py-1 rounded-pill mb-2">
+        <i class="fa-solid fa-microchip me-1"></i> Inference &amp; Explainability Engine
+      </span>
+      <h2 class="fw-bold text-white mb-0">Counselling Session Emotion &amp; Engagement Report</h2>
+      <p class="text-muted small mb-0">Model: <strong class="text-white">{{ result.model_name }}</strong> &bull; Latency: <span class="text-info">{{ result.inference_time_ms }} ms</span></p>
+    </div>
+    <div class="d-flex gap-2">
+      <button onclick="window.print()" class="btn btn-outline-light btn-sm rounded-pill px-3">
+        <i class="fa-solid fa-print me-1"></i> Print Report
+      </button>
+      <a href="{{ url_for('upload_page') }}" class="glow-btn-primary btn-sm py-2 px-3">
+        <i class="fa-solid fa-plus me-1"></i> New Prediction
+      </a>
+    </div>
+  </div>
+
+  <div class="row g-4">
+    <!-- LEFT COLUMN: PRIMARY PREDICTION & XAI GRAD-CAM -->
+    <div class="col-lg-6">
+      <!-- Primary Emotion Badge Card -->
+      <div class="glass-card p-4 mb-4 text-center">
+        <div class="text-muted small text-uppercase fw-bold mb-2">Primary Detected Emotion</div>
+        <div class="mb-3">
+          <span class="badge-emotion badge-{{ result.predicted_emotion }} fs-4 py-2 px-4 shadow">
+            {% if result.predicted_emotion == 'angry' %}<i class="fa-solid fa-fire"></i>
+            {% elif result.predicted_emotion == 'happy' %}<i class="fa-solid fa-face-smile"></i>
+            {% elif result.predicted_emotion == 'relax' %}<i class="fa-solid fa-spa"></i>
+            {% elif result.predicted_emotion == 'rock' %}<i class="fa-solid fa-bolt"></i>
+            {% elif result.predicted_emotion == 'romantic' %}<i class="fa-solid fa-heart"></i>
+            {% elif result.predicted_emotion == 'sad' %}<i class="fa-solid fa-face-sad-tear"></i>
+            {% elif result.predicted_emotion == 'surprise' %}<i class="fa-solid fa-bolt-lightning"></i>
+            {% endif %}
+            {{ result.predicted_emotion | upper }}
+          </span>
+        </div>
+        <div class="display-6 fw-bold text-white mb-1">{{ result.confidence }}%</div>
+        <div class="text-muted small">Classification Confidence Score</div>
+      </div>
+
+      <!-- GRAD-CAM VISUAL ATTENTION HEATMAP CARD -->
+      <div class="glass-card p-4 mb-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h5 class="fw-bold text-white mb-0">
+            <i class="fa-solid fa-bullseye text-danger me-2"></i> Grad-CAM Visual Heatmap
+          </h5>
+          <span class="badge bg-danger bg-opacity-25 text-danger border border-danger">Vision XAI</span>
+        </div>
+        <p class="text-muted small mb-3">
+          Gradient-weighted Class Activation Mapping demonstrates the specific facial landmark regions that the convolutional and transformer filters attended to.
+        </p>
+
+        <div class="text-center mb-3">
+          <div class="heatmap-container position-relative d-inline-block">
+            <!-- Source Image or Avatar -->
+            {% if result.image_url %}
+              <img src="{{ result.image_url }}" alt="Analyzed Face" id="sourceImage" style="max-height: 250px; border-radius: 12px; display: block;">
+            {% else %}
+              <img src="{{ url_for('static', filename='sample_data/' + result.predicted_emotion + '.svg') }}" alt="Analyzed Face" id="sourceImage" style="max-height: 250px; border-radius: 12px; display: block;">
+            {% endif %}
+
+            <!-- Dynamic SVG Heatmap Overlay -->
+            <svg class="heatmap-overlay" viewBox="0 0 100 100" preserveAspectRatio="none">
+              <defs>
+                <radialGradient id="gradCamHot" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#ef4444" stop-opacity="0.75"/>
+                  <stop offset="50%" stop-color="#f59e0b" stop-opacity="0.45"/>
+                  <stop offset="100%" stop-color="#3b82f6" stop-opacity="0.0"/>
+                </radialGradient>
+              </defs>
+              {% for reg in xai_gradcam.activation_regions %}
+                <circle cx="{{ reg.x }}" cy="{{ reg.y }}" r="{{ reg.radius }}" fill="url(#gradCamHot)" />
+              {% endfor %}
+            </svg>
+          </div>
+        </div>
+
+        <div class="p-3 rounded-3" style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--border-color);">
+          <div class="fw-bold text-info small mb-1"><i class="fa-solid fa-magnifying-glass me-1"></i> Neurological Focus Interpretation:</div>
+          <div class="text-muted small mb-2">{{ xai_gradcam.summary }}</div>
+          <div class="d-flex flex-wrap gap-2">
+            {% for reg in xai_gradcam.activation_regions %}
+              <span class="badge bg-dark border border-secondary text-light small">
+                {{ reg.region }} (Weight: {{ reg.weight }})
+              </span>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+
+      <!-- 7 EMOTIONS PROBABILITY DISTRIBUTION -->
+      <div class="glass-card p-4">
+        <h5 class="fw-bold text-white mb-3">
+          <i class="fa-solid fa-chart-column text-info me-2"></i> Probability Distribution (7 Emotions)
+        </h5>
+
+        {% for emo in ['angry', 'happy', 'relax', 'rock', 'romantic', 'sad', 'surprise'] %}
+        <div class="prob-row">
+          <div class="prob-header">
+            <span class="text-capitalize small fw-bold text-white">{{ emo }}</span>
+            <span class="small font-monospace text-muted">{{ result.probabilities[emo] }}%</span>
+          </div>
+          <div class="prob-track">
+            <div class="prob-fill" style="width: {{ result.probabilities[emo] }}%; 
+              {% if emo == 'angry' %}background: var(--color-angry);
+              {% elif emo == 'happy' %}background: var(--color-happy);
+              {% elif emo == 'relax' %}background: var(--color-relax);
+              {% elif emo == 'rock' %}background: var(--color-rock);
+              {% elif emo == 'romantic' %}background: var(--color-romantic);
+              {% elif emo == 'sad' %}background: var(--color-sad);
+              {% else %}background: var(--color-surprise);{% endif %}">
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- RIGHT COLUMN: COUNSELLING ENGAGEMENT & SHAP -->
+    <div class="col-lg-6">
+      <!-- COUNSELLING ENGAGEMENT INDEX CARD -->
+      <div class="glass-card p-4 mb-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h5 class="fw-bold text-white mb-0">
+            <i class="fa-solid fa-heart-pulse text-success me-2"></i> Counselling Engagement Index
+          </h5>
+          <span class="badge bg-{{ engagement.badge_class }} bg-opacity-25 text-{{ engagement.badge_class }} border border-{{ engagement.badge_class }}">
+            {{ engagement.urgency }}
+          </span>
+        </div>
+
+        <div class="d-flex align-items-center gap-4 mb-3">
+          <div class="stat-box py-3 px-4 flex-shrink-0" style="min-width: 140px;">
+            <div class="stat-value fs-2">{{ engagement.engagement_score }}%</div>
+            <div class="stat-label">Engagement Index</div>
+          </div>
+          <div>
+            <h6 class="fw-bold text-white mb-1">{{ engagement.engagement_tier }}</h6>
+            <p class="text-muted small mb-0">
+              Therapeutic alliance rating calculated from emotional stability, micro-expressions, and cognitive receptivity.
+            </p>
+          </div>
+        </div>
+
+        <!-- Evidence-Based Counselor Recommendations -->
+        <div class="p-3 rounded-3 mb-3" style="background: rgba(15, 23, 42, 0.7); border-left: 4px solid var(--secondary);">
+          <div class="fw-bold text-white small mb-1">
+            <i class="fa-solid fa-user-doctor text-info me-1"></i> Recommended Clinical Protocol: {{ engagement.recommendation_title }}
+          </div>
+          <div class="text-info small mb-2">Goal: {{ engagement.therapeutic_goal }}</div>
+          <ul class="list-unstyled mb-0 small text-muted">
+            {% for item in engagement.interventions %}
+              <li class="mb-1"><i class="fa-solid fa-chevron-right text-info me-2 small"></i>{{ item }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+
+        {% if counselor_notes %}
+        <div class="p-3 rounded-3" style="background: rgba(30, 41, 59, 0.6); border: 1px solid var(--border-color);">
+          <div class="text-muted small fw-bold mb-1">Counselor Session Observation:</div>
+          <div class="text-white small fst-italic">"{{ counselor_notes }}"</div>
+        </div>
+        {% endif %}
+      </div>
+
+      <!-- SHAP FEATURE ATTRIBUTION (XAI) -->
+      <div class="glass-card p-4 mb-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h5 class="fw-bold text-white mb-0">
+            <i class="fa-solid fa-diagram-project text-warning me-2"></i> SHAP Feature Attribution
+          </h5>
+          <span class="badge bg-warning bg-opacity-25 text-warning border border-warning">Game-Theoretic XAI</span>
+        </div>
+        <p class="text-muted small mb-3">
+          Shapley values demonstrate how individual facial geometry, acoustic prosody, and linguistic tokens shifted prediction odds relative to the base prior (14.3%).
+        </p>
+
+        <div class="p-3 rounded-3 mb-3" style="background: rgba(15, 23, 42, 0.6);">
+          {% for item in xai_shap.shap_features %}
+          <div class="shap-bar-container">
+            <div class="shap-label" title="{{ item.feature }}">{{ item.feature }}</div>
+            <div class="shap-track">
+              <div class="shap-center-line"></div>
+              {% if item.shap_value >= 0 %}
+                <div class="shap-bar-pos" style="width: {{ [item.shap_value * 2.0, 48.0] | min }}%;"></div>
+              {% else %}
+                <div class="shap-bar-neg" style="width: {{ [(item.shap_value | abs) * 2.0, 48.0] | min }}%;"></div>
+              {% endif %}
+            </div>
+            <div class="shap-val-text {% if item.shap_value >= 0 %}text-danger{% else %}text-info{% endif %}">
+              {% if item.shap_value >= 0 %}+{% endif %}{{ item.shap_value }}%
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+
+        <div class="d-flex justify-content-between small text-muted">
+          <span><span class="badge bg-danger me-1">&nbsp;</span> Pushes toward {{ result.predicted_emotion | upper }}</span>
+          <span><span class="badge bg-primary me-1">&nbsp;</span> Pushes against {{ result.predicted_emotion | upper }}</span>
+        </div>
+      </div>
+
+      <!-- Multilingual Token Context (If Text Analysis) -->
+      {% if result.matched_tokens %}
+      <div class="glass-card p-4">
+        <h6 class="fw-bold text-white mb-2"><i class="fa-solid fa-language text-info me-2"></i> Multilingual Linguistic Extraction</h6>
+        <div class="text-muted small mb-2">Language: <strong class="text-info">{{ result.detected_language_name }}</strong> &bull; Polarity: <strong>{{ result.sentiment_polarity }}</strong></div>
+        <div class="d-flex flex-wrap gap-2">
+          {% for token in result.matched_tokens %}
+            <span class="badge bg-dark border border-secondary text-white py-2 px-3">
+              "{{ token.word }}" &rarr; <span class="text-info">{{ token.emotion }}</span>
+            </span>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+
+    </div>
+  </div>
+</div>
+{% endblock %}

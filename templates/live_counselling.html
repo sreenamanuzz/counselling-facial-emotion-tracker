@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+
+{% block title %}Live Video Tracking - Counselling Engagement{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <div>
+      <h3 class="fw-bold text-white mb-0">
+        <i class="fa-solid fa-video text-danger me-2"></i> Real-Time Video-Based Counselling Engagement
+      </h3>
+      <p class="text-muted small mb-0">Automated micro-expression detection and clinical rapport monitoring</p>
+    </div>
+    <div class="d-flex gap-2">
+      <button type="button" id="startCamBtn" class="glow-btn-primary btn-sm">
+        <i class="fa-solid fa-play"></i> Start Camera / AI Stream
+      </button>
+      <button type="button" id="stopCamBtn" class="btn btn-outline-danger btn-sm rounded-pill px-3">
+        <i class="fa-solid fa-stop"></i> Stop Stream
+      </button>
+    </div>
+  </div>
+
+  <div class="row g-4">
+    <!-- Main Video & Canvas HUD Feed -->
+    <div class="col-lg-8">
+      <div class="glass-card p-3 position-relative text-center overflow-hidden" style="min-height: 480px; background: #0b0f19;">
+        <!-- Hidden video element -->
+        <video id="liveVideo" autoplay playsinline muted style="display: none;"></video>
+        
+        <!-- Live HUD Canvas -->
+        <canvas id="liveCanvas" width="640" height="480" style="max-width: 100%; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);"></canvas>
+
+        <!-- Initial Placeholder when not started -->
+        <div id="camPlaceholder" class="position-absolute top-50 start-50 translate-middle text-center">
+          <i class="fa-solid fa-camera fa-4x text-muted mb-3 opacity-50"></i>
+          <h5 class="text-white fw-bold">Camera Feed Offline</h5>
+          <p class="text-muted small mb-3">Click "Start Camera" to initiate real-time facial expression tracking.</p>
+          <button type="button" class="btn btn-primary btn-sm rounded-pill px-4" onclick="document.getElementById('startCamBtn').click()">
+            <i class="fa-solid fa-power-off me-1"></i> Activate Now
+          </button>
+        </div>
+      </div>
+
+      <!-- Real-time Action Unit Legend -->
+      <div class="glass-card p-3 mt-3 d-flex flex-wrap justify-content-between align-items-center gap-2">
+        <div class="text-muted small fw-bold">Active Detection Models:</div>
+        <div class="d-flex gap-2 flex-wrap">
+          <span class="badge bg-dark border border-secondary text-white">YOLOv12 Face Bounding Box</span>
+          <span class="badge bg-dark border border-secondary text-info">CRNN Temporal Sequence</span>
+          <span class="badge bg-dark border border-secondary text-success">Conformer Attention Head</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Telemetry & Clinical Guidance Panel -->
+    <div class="col-lg-4">
+      <!-- Live Emotion Status Card -->
+      <div class="glass-card p-4 mb-4">
+        <div class="text-muted small text-uppercase fw-bold mb-2">Current Facial Expression</div>
+        <div class="d-flex align-items-center justify-content-between mb-3">
+          <span id="liveEmotionBadge" class="badge-emotion badge-relax fs-6 py-2 px-3">RELAX</span>
+          <div>
+            <span class="text-muted small">Confidence:</span>
+            <span id="liveConfidenceText" class="fw-bold text-white fs-5 ms-1">94.2%</span>
+          </div>
+        </div>
+
+        <!-- Engagement Gauge -->
+        <div class="mb-3">
+          <div class="d-flex justify-content-between align-items-center small mb-1">
+            <span class="text-muted">Counselling Engagement Index:</span>
+            <span id="liveEngagementScoreText" class="fw-bold text-info">88%</span>
+          </div>
+          <div class="progress" style="height: 10px; background: rgba(255,255,255,0.08); border-radius: 5px;">
+            <div id="liveEngagementGauge" class="progress-bar bg-info" style="width: 88%; transition: width 0.4s ease;"></div>
+          </div>
+        </div>
+
+        <!-- Live Clinical Recommendation Notification -->
+        <div class="p-3 rounded-3" style="background: rgba(15, 23, 42, 0.7); border-left: 4px solid #06b6d4;">
+          <div class="small fw-bold text-info mb-1"><i class="fa-solid fa-lightbulb me-1"></i> Clinical Suggestion:</div>
+          <div id="liveClinicalNote" class="text-muted small">
+            Client displays steady baseline facial relaxation. Optimal therapeutic window for cognitive reframing and exploring core beliefs.
+          </div>
+        </div>
+      </div>
+
+      <!-- Counselor Live Session Notes & Save Card -->
+      <div class="glass-card p-4">
+        <h6 class="fw-bold text-white mb-2"><i class="fa-solid fa-clipboard-user text-info me-2"></i> Log Session Snapshot</h6>
+        <form method="POST" action="{{ url_for('save_live_session_route') }}">
+          <input type="hidden" id="snapshotEmotion" name="emotion" value="relax">
+          <input type="hidden" id="snapshotConfidence" name="confidence" value="94.2">
+          <input type="hidden" id="snapshotEngagement" name="engagement" value="88">
+          
+          <div class="mb-3">
+            <label class="form-label text-muted small">Counselor Clinical Observation:</label>
+            <textarea name="notes" rows="3" class="form-control bg-dark text-white border-secondary small" placeholder="e.g., Client exhibited relaxed demeanor while discussing coping strategies..."></textarea>
+          </div>
+
+          <button type="submit" class="glow-btn-primary w-100 justify-content-center btn-sm py-2">
+            <i class="fa-solid fa-floppy-disk"></i> Save Session Record to Database
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="{{ url_for('static', filename='js/webcam_tracker.js') }}"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const tracker = new LiveCounsellingTracker('liveVideo', 'liveCanvas');
+  const startBtn = document.getElementById('startCamBtn');
+  const stopBtn = document.getElementById('stopCamBtn');
+  const placeholder = document.getElementById('camPlaceholder');
+
+  startBtn.addEventListener('click', async function () {
+    if (placeholder) placeholder.style.display = 'none';
+    await tracker.startCamera();
+  });
+
+  stopBtn.addEventListener('click', function () {
+    tracker.stopCamera();
+    if (placeholder) placeholder.style.display = 'block';
+  });
+
+  // Keep snapshot inputs synced
+  setInterval(() => {
+    if (tracker.isRunning) {
+      document.getElementById('snapshotEmotion').value = tracker.currentEmotion;
+      document.getElementById('snapshotConfidence').value = tracker.confidence;
+      document.getElementById('snapshotEngagement').value = tracker.engagementScore;
+    }
+  }, 1000);
+});
+</script>
+{% endblock %}

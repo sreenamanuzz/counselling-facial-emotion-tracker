@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}Login - Counselling Emotion Tracker{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+      <div class="glass-card p-4 p-md-5">
+        <div class="text-center mb-4">
+          <div class="d-inline-flex p-3 rounded-circle mb-3" style="background: rgba(6, 182, 212, 0.2); color: #22d3ee;">
+            <i class="fa-solid fa-user-lock fa-2xl"></i>
+          </div>
+          <h3 class="fw-bold text-white mb-1">Counselor Sign In</h3>
+          <p class="text-muted small">Access session tracking, model analytics &amp; prediction</p>
+        </div>
+
+        <!-- Quick Demo Credentials Box -->
+        <div class="p-3 mb-4 rounded-3 text-start" style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(6, 182, 212, 0.3);">
+          <div class="small fw-bold text-info mb-1"><i class="fa-solid fa-key me-1"></i> Demo Counselor Credentials:</div>
+          <div class="small text-muted">Email: <span class="text-white font-monospace">counselor@mindcare.org</span></div>
+          <div class="small text-muted">Password: <span class="text-white font-monospace">password123</span></div>
+          <button type="button" class="btn btn-sm btn-outline-info mt-2 py-0 px-2" onclick="fillDemoCredentials()">
+            Auto-fill Credentials
+          </button>
+        </div>
+
+        <form method="POST" action="{{ url_for('login') }}">
+          <div class="mb-3">
+            <label class="form-label text-muted small fw-bold">Email or Username</label>
+            <div class="input-group">
+              <span class="input-group-text bg-dark border-secondary text-muted"><i class="fa-solid fa-envelope"></i></span>
+              <input type="text" id="loginEmail" name="email_or_username" class="form-control bg-dark text-white border-secondary" placeholder="counselor@mindcare.org" required>
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <label class="form-label text-muted small fw-bold">Password</label>
+            <div class="input-group">
+              <span class="input-group-text bg-dark border-secondary text-muted"><i class="fa-solid fa-lock"></i></span>
+              <input type="password" id="loginPassword" name="password" class="form-control bg-dark text-white border-secondary" placeholder="password123" required>
+            </div>
+          </div>
+
+          <button type="submit" class="glow-btn-primary w-100 justify-content-center py-2 mb-3">
+            <i class="fa-solid fa-right-to-bracket"></i> Sign In to Dashboard
+          </button>
+
+          <div class="text-center text-muted small">
+            Don't have an account? <a href="{{ url_for('register') }}" class="text-info text-decoration-none">Register</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function fillDemoCredentials() {
+  document.getElementById('loginEmail').value = 'counselor@mindcare.org';
+  document.getElementById('loginPassword').value = 'password123';
+}
+</script>
+{% endblock %}

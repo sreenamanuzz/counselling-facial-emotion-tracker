@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}Register - Counselling Emotion Tracker{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+      <div class="glass-card p-4 p-md-5">
+        <div class="text-center mb-4">
+          <div class="d-inline-flex p-3 rounded-circle mb-3" style="background: rgba(79, 70, 229, 0.2); color: #818cf8;">
+            <i class="fa-solid fa-user-plus fa-2xl"></i>
+          </div>
+          <h3 class="fw-bold text-white mb-1">Create Account</h3>
+          <p class="text-muted small">Register as a Counselor or Client for video session tracking</p>
+        </div>
+
+        <form method="POST" action="{{ url_for('register') }}">
+          <div class="mb-3">
+            <label class="form-label text-muted small fw-bold">Full Name / Counselor ID</label>
+            <div class="input-group">
+              <span class="input-group-text bg-dark border-secondary text-muted"><i class="fa-solid fa-user"></i></span>
+              <input type="text" name="username" class="form-control bg-dark text-white border-secondary" placeholder="e.g. Dr. Alex Morgan" required>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label text-muted small fw-bold">Email Address</label>
+            <div class="input-group">
+              <span class="input-group-text bg-dark border-secondary text-muted"><i class="fa-solid fa-envelope"></i></span>
+              <input type="email" name="email" class="form-control bg-dark text-white border-secondary" placeholder="counselor@clinic.org" required>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label text-muted small fw-bold">Role in Counselling</label>
+            <select name="role" class="form-select bg-dark text-white border-secondary">
+              <option value="Licensed Counselor" selected>Licensed Counselor / Therapist</option>
+              <option value="Psychologist">Clinical Psychologist</option>
+              <option value="Client / Patient">Client / Patient</option>
+              <option value="Researcher">Clinical AI Researcher</option>
+            </select>
+          </div>
+
+          <div class="mb-4">
+            <label class="form-label text-muted small fw-bold">Password</label>
+            <div class="input-group">
+              <span class="input-group-text bg-dark border-secondary text-muted"><i class="fa-solid fa-lock"></i></span>
+              <input type="password" name="password" class="form-control bg-dark text-white border-secondary" placeholder="At least 6 characters" required>
+            </div>
+          </div>
+
+          <button type="submit" class="glow-btn-primary w-100 justify-content-center py-2 mb-3">
+            <i class="fa-solid fa-check"></i> Register Account
+          </button>
+
+          <div class="text-center text-muted small">
+            Already registered? <a href="{{ url_for('login') }}" class="text-info text-decoration-none">Sign In</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

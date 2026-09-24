@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="300" height="300">
+  <defs>
+    <radialGradient id="relaxGrad" cx="50%" cy="45%" r="50%">
+      <stop offset="0%" stop-color="#cffafe" />
+      <stop offset="100%" stop-color="#67e8f9" />
+    </radialGradient>
+  </defs>
+  <rect width="100%" height="100%" fill="#1e1e2d" rx="20"/>
+  <circle cx="150" cy="150" r="105" fill="url(#relaxGrad)" stroke="#06b6d4" stroke-width="4"/>
+  <!-- Relaxed Calm Brows -->
+  <path d="M 88 120 Q 110 115 132 120" stroke="#164e63" stroke-width="4" fill="none" stroke-linecap="round" />
+  <path d="M 168 120 Q 190 115 212 120" stroke="#164e63" stroke-width="4" fill="none" stroke-linecap="round" />
+  <!-- Serene Closed Eyes (Meditation / Equilibrium) -->
+  <path d="M 92 148 Q 110 160 128 148" stroke="#164e63" stroke-width="5" fill="none" stroke-linecap="round" />
+  <path d="M 172 148 Q 190 160 208 148" stroke="#164e63" stroke-width="5" fill="none" stroke-linecap="round" />
+  <!-- Gentle Peaceful Smile -->
+  <path d="M 115 195 Q 150 215 185 195" stroke="#164e63" stroke-width="5" fill="none" stroke-linecap="round" />
+  <!-- Soft Breathing indicator -->
+  <circle cx="150" cy="150" r="100" fill="none" stroke="#22d3ee" stroke-width="2" stroke-dasharray="6,8" opacity="0.6"/>
+  <text x="150" y="280" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#22d3ee" text-anchor="middle">EMOTION: RELAX (EQUILIBRIUM)</text>
+</svg>

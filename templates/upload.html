@@ -1,0 +1,236 @@
+{% extends "base.html" %}
+
+{% block title %}Multi-Modal Upload - Counselling Emotion Tracker{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-10">
+      <!-- Header -->
+      <div class="text-center mb-4">
+        <h2 class="fw-bold text-white mb-2">Multi-Modal Counselling Engagement Hub</h2>
+        <p class="text-muted">
+          Analyze client emotional state and engagement across <strong>Facial Images</strong>, <strong>Live Webcam Stream</strong>, <strong>Speech Audio</strong>, and <strong>Multilingual Dialog (Malayalam, Hindi, English)</strong>.
+        </p>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <div class="tab-pills">
+        <button type="button" class="tab-pill-btn active" data-tab="tab-image">
+          <i class="fa-solid fa-image me-1"></i> 1. Image / Face Upload
+        </button>
+        <button type="button" class="tab-pill-btn" data-tab="tab-text">
+          <i class="fa-solid fa-language me-1"></i> 2. Multilingual Text
+        </button>
+        <button type="button" class="tab-pill-btn" data-tab="tab-audio">
+          <i class="fa-solid fa-microphone me-1"></i> 3. Speech / Audio
+        </button>
+        <button type="button" class="tab-pill-btn" data-tab="tab-live">
+          <i class="fa-solid fa-video me-1 text-danger"></i> 4. Live Video Stream
+        </button>
+      </div>
+
+      <!-- TAB 1: IMAGE / FACE UPLOAD -->
+      <div id="tab-image" class="tab-content-panel glass-card p-4 p-md-5 mb-4">
+        <h4 class="fw-bold text-white mb-3"><i class="fa-solid fa-camera text-info me-2"></i> Facial Image Expression Analysis</h4>
+        <p class="text-muted small mb-4">
+          Upload a facial portrait or select a sample benchmark portrait representing one of the 7 counseling emotions. The engine will extract facial action units, run the selected model, and generate <strong>Grad-CAM</strong> visual attention heatmaps and <strong>SHAP</strong> feature attributions.
+        </p>
+
+        <form method="POST" action="{{ url_for('predict_image_route') }}" enctype="multipart/form-data">
+          <!-- Algorithm Selection -->
+          <div class="row g-3 mb-4">
+            <div class="col-md-6">
+              <label class="form-label text-muted small fw-bold">Select Architecture for Inference:</label>
+              <select name="model_name" class="form-select bg-dark text-white border-secondary">
+                <option value="CNN + Conformer" selected>CNN + Conformer (93.7% Accuracy - Recommended)</option>
+                <option value="CRNN with Attention">CRNN with Attention (91.5% Accuracy)</option>
+                <option value="YOLOv12 / Computer Vision">YOLOv12 / Computer Vision (89.2% Accuracy, Ultra-fast)</option>
+                <option value="XGBoost">XGBoost Classifier (86.8% Accuracy)</option>
+                <option value="Random Forest">Random Forest (83.4% Accuracy)</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label text-muted small fw-bold">Counselor Session Note (Optional):</label>
+              <input type="text" name="counselor_notes" class="form-control bg-dark text-white border-secondary" placeholder="e.g. Session 4: Client exploring workplace boundary conflict">
+            </div>
+          </div>
+
+          <!-- File Upload Box -->
+          <div class="mb-4 text-center p-4 rounded-3" style="background: rgba(15, 23, 42, 0.7); border: 2px dashed rgba(148, 163, 184, 0.3);">
+            <i class="fa-solid fa-cloud-arrow-up fa-3x text-info mb-3"></i>
+            <div class="fw-bold text-white mb-1">Choose a facial photo or drag &amp; drop here</div>
+            <div class="text-muted small mb-3">Supported formats: JPG, PNG, WEBP (AffectNet 48x48 or High-Res)</div>
+            <input type="file" id="imageFileInput" name="image_file" class="form-control bg-dark text-white border-secondary w-75 mx-auto" accept="image/*">
+            <input type="hidden" id="filenameHintInput" name="filename_hint" value="">
+          </div>
+
+          <!-- Image Preview Display -->
+          <div id="imagePreviewContainer" class="text-center mb-4" style="display: none;">
+            <div class="text-muted small mb-2">Selected Image Preview:</div>
+            <img id="imagePreview" src="#" alt="Preview" style="max-height: 220px; border-radius: 12px; border: 2px solid #4f46e5; box-shadow: 0 8px 25px rgba(0,0,0,0.5);">
+            <div id="sampleInputNotice" class="text-info small fw-bold mt-2" style="display: none;"></div>
+          </div>
+
+          <!-- Quick Test Presets (All 7 Emotions) -->
+          <div class="mb-4">
+            <label class="form-label text-muted small fw-bold mb-2">Or Instant Test With Benchmark Portraits (7 Emotions):</label>
+            <div class="d-flex flex-wrap gap-2">
+              <button type="button" class="btn btn-sm btn-outline-danger" onclick="loadSampleImage('angry')"><i class="fa-solid fa-fire me-1"></i> Angry</button>
+              <button type="button" class="btn btn-sm btn-outline-success" onclick="loadSampleImage('happy')"><i class="fa-solid fa-face-smile me-1"></i> Happy</button>
+              <button type="button" class="btn btn-sm btn-outline-info" onclick="loadSampleImage('relax')"><i class="fa-solid fa-spa me-1"></i> Relax</button>
+              <button type="button" class="btn btn-sm btn-outline-warning" onclick="loadSampleImage('rock')"><i class="fa-solid fa-bolt me-1"></i> Rock</button>
+              <button type="button" class="btn btn-sm btn-outline-light" style="border-color:#ec4899; color:#f472b6;" onclick="loadSampleImage('romantic')"><i class="fa-solid fa-heart me-1"></i> Romantic</button>
+              <button type="button" class="btn btn-sm btn-outline-primary" onclick="loadSampleImage('sad')"><i class="fa-solid fa-face-sad-tear me-1"></i> Sad</button>
+              <button type="button" class="btn btn-sm btn-outline-secondary" style="border-color:#8b5cf6; color:#a78bfa;" onclick="loadSampleImage('surprise')"><i class="fa-solid fa-bolt-lightning me-1"></i> Surprise</button>
+            </div>
+          </div>
+
+          <button type="submit" class="glow-btn-primary w-100 justify-content-center py-3">
+            <i class="fa-solid fa-wand-magic-sparkles"></i> Run Facial Expression &amp; Engagement Analysis
+          </button>
+        </form>
+      </div>
+
+      <!-- TAB 2: MULTILINGUAL TEXT -->
+      <div id="tab-text" class="tab-content-panel glass-card p-4 p-md-5 mb-4" style="display: none;">
+        <h4 class="fw-bold text-white mb-3"><i class="fa-solid fa-comments text-info me-2"></i> Multilingual Client Statement &amp; Transcript Analysis</h4>
+        <p class="text-muted small mb-4">
+          Analyze dialogue from counseling transcripts in <strong>Malayalam (മലയാളം)</strong>, <strong>Hindi (हिन्दी)</strong>, or <strong>English</strong>. The multilingual NLP engine extracts affective valence, sentiment polarity, and counseling emotional state.
+        </p>
+
+        <form method="POST" action="{{ url_for('predict_text_route') }}">
+          <div class="row g-3 mb-3">
+            <div class="col-md-6">
+              <label class="form-label text-muted small fw-bold">Language Selection:</label>
+              <select id="languageSelect" name="language" class="form-select bg-dark text-white border-secondary">
+                <option value="en">English</option>
+                <option value="ml">Malayalam (മലയാളം)</option>
+                <option value="hi">Hindi (हिन्दी)</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label text-muted small fw-bold">Model Backend:</label>
+              <input type="text" class="form-control bg-dark text-muted border-secondary" value="Multimodal Transformer + Affective Lexicon" readonly>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label text-muted small fw-bold">Client Statement / Transcript Input:</label>
+            <textarea id="counsellingTextInput" name="input_text" rows="4" class="form-control bg-dark text-white border-secondary" placeholder="Enter counseling statement or click a multilingual sample below..." required></textarea>
+          </div>
+
+          <!-- Multilingual Sample Buttons -->
+          <div class="p-3 mb-4 rounded-3" style="background: rgba(15, 23, 42, 0.6); border: 1px solid var(--border-color);">
+            <div class="text-muted small fw-bold mb-2">Load Pre-built Dialect Samples:</div>
+            
+            <div class="mb-2">
+              <span class="badge bg-dark border border-secondary text-info me-2">മലയാളം (Malayalam):</span>
+              <button type="button" class="btn btn-sm btn-outline-light py-0 px-2 me-1" onclick="loadSamplePrompt('malayalam', 0)">Relax (സമാധാനം)</button>
+              <button type="button" class="btn btn-sm btn-outline-danger py-0 px-2 me-1" onclick="loadSamplePrompt('malayalam', 1)">Angry (ദേഷ്യം)</button>
+              <button type="button" class="btn btn-sm btn-outline-success py-0 px-2 me-1" onclick="loadSamplePrompt('malayalam', 2)">Happy (സന്തോഷം)</button>
+              <button type="button" class="btn btn-sm btn-outline-primary py-0 px-2 me-1" onclick="loadSamplePrompt('malayalam', 3)">Sad (സങ്കടം)</button>
+              <button type="button" class="btn btn-sm btn-outline-warning py-0 px-2" onclick="loadSamplePrompt('malayalam', 4)">Rock (പൊളിച്ചു)</button>
+            </div>
+
+            <div class="mb-2">
+              <span class="badge bg-dark border border-secondary text-warning me-2">हिन्दी (Hindi):</span>
+              <button type="button" class="btn btn-sm btn-outline-light py-0 px-2 me-1" onclick="loadSamplePrompt('hindi', 0)">Relax (शांत)</button>
+              <button type="button" class="btn btn-sm btn-outline-danger py-0 px-2 me-1" onclick="loadSamplePrompt('hindi', 1)">Angry (गुस्सा)</button>
+              <button type="button" class="btn btn-sm btn-outline-success py-0 px-2 me-1" onclick="loadSamplePrompt('hindi', 2)">Happy (खुश)</button>
+              <button type="button" class="btn btn-sm btn-outline-primary py-0 px-2 me-1" onclick="loadSamplePrompt('hindi', 3)">Sad (उदास)</button>
+              <button type="button" class="btn btn-sm btn-outline-warning py-0 px-2" onclick="loadSamplePrompt('hindi', 4)">Rock (जोश)</button>
+            </div>
+
+            <div>
+              <span class="badge bg-dark border border-secondary text-light me-2">English:</span>
+              <button type="button" class="btn btn-sm btn-outline-light py-0 px-2 me-1" onclick="loadSamplePrompt('english', 0)">Relax</button>
+              <button type="button" class="btn btn-sm btn-outline-danger py-0 px-2 me-1" onclick="loadSamplePrompt('english', 1)">Angry</button>
+              <button type="button" class="btn btn-sm btn-outline-success py-0 px-2 me-1" onclick="loadSamplePrompt('english', 2)">Happy</button>
+              <button type="button" class="btn btn-sm btn-outline-primary py-0 px-2 me-1" onclick="loadSamplePrompt('english', 3)">Sad</button>
+              <button type="button" class="btn btn-sm btn-outline-warning py-0 px-2" onclick="loadSamplePrompt('english', 4)">Rock</button>
+            </div>
+          </div>
+
+          <button type="submit" class="glow-btn-primary w-100 justify-content-center py-3">
+            <i class="fa-solid fa-magnifying-glass-chart"></i> Analyze Multilingual Statement
+          </button>
+        </form>
+      </div>
+
+      <!-- TAB 3: AUDIO / SPEECH -->
+      <div id="tab-audio" class="tab-content-panel glass-card p-4 p-md-5 mb-4" style="display: none;">
+        <h4 class="fw-bold text-white mb-3"><i class="fa-solid fa-microphone-lines text-info me-2"></i> Voice Prosody &amp; Speech Emotion Analysis</h4>
+        <p class="text-muted small mb-4">
+          Evaluates speech pitch variability (F0), vocal cadence, pause ratios, and acoustic energy to detect client emotional arousal and stability.
+        </p>
+
+        <form method="POST" action="{{ url_for('predict_audio_route') }}" enctype="multipart/form-data">
+          <!-- In-Browser Recording Box -->
+          <div class="p-4 mb-4 rounded-3 text-center" style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--border-color);">
+            <div class="mb-3">
+              <span id="recordTimer" class="badge bg-dark border border-secondary px-3 py-2 font-monospace fs-5">00:00</span>
+            </div>
+            <div class="d-flex justify-content-center gap-3 mb-3">
+              <button type="button" id="startRecordBtn" class="btn btn-danger px-4 rounded-pill">
+                <i class="fa-solid fa-circle me-1"></i> Start Recording
+              </button>
+              <button type="button" id="stopRecordBtn" class="btn btn-outline-light px-4 rounded-pill" disabled>
+                <i class="fa-solid fa-square me-1"></i> Stop Recording
+              </button>
+            </div>
+            <audio id="audioPlayer" controls class="w-70 mx-auto mt-2" style="display: none;"></audio>
+            <input type="hidden" id="audioBlobInput" name="audio_blob" value="">
+          </div>
+
+          <!-- File Upload Option -->
+          <div class="mb-4">
+            <label class="form-label text-muted small fw-bold">Or Upload an Audio File (WAV, MP3, WebM):</label>
+            <input type="file" id="audioFileInput" name="audio_file" class="form-control bg-dark text-white border-secondary" accept="audio/*">
+            <input type="hidden" id="audioHintInput" name="audio_hint" value="">
+          </div>
+
+          <!-- Quick Audio Sample Presets -->
+          <div class="mb-4">
+            <label class="form-label text-muted small fw-bold mb-2">Or Test With Acoustic Presets:</label>
+            <div class="d-flex flex-wrap gap-2">
+              <button type="button" class="btn btn-sm btn-outline-info" onclick="document.getElementById('audioHintInput').value='sample_relax.wav'; showToast('Loaded Calm Voice Profile (Relax)');">Calm Cadence (Relax)</button>
+              <button type="button" class="btn btn-sm btn-outline-danger" onclick="document.getElementById('audioHintInput').value='sample_angry.wav'; showToast('Loaded High Jitter Pitch (Angry)');">Tense Voice (Angry)</button>
+              <button type="button" class="btn btn-sm btn-outline-success" onclick="document.getElementById('audioHintInput').value='sample_happy.wav'; showToast('Loaded Upward Modulated Voice (Happy)');">Joyful Tone (Happy)</button>
+              <button type="button" class="btn btn-sm btn-outline-primary" onclick="document.getElementById('audioHintInput').value='sample_sad.wav'; showToast('Loaded Low Intensity / Long Pauses (Sad)');">Somber Tone (Sad)</button>
+            </div>
+          </div>
+
+          <button type="submit" class="glow-btn-primary w-100 justify-content-center py-3">
+            <i class="fa-solid fa-wave-square"></i> Run Speech Acoustic Emotion Analysis
+          </button>
+        </form>
+      </div>
+
+      <!-- TAB 4: LIVE VIDEO -->
+      <div id="tab-live" class="tab-content-panel glass-card p-4 p-md-5 mb-4 text-center" style="display: none;">
+        <div class="d-inline-flex p-3 rounded-circle mb-3" style="background: rgba(239, 68, 68, 0.15); color: #ef4444;">
+          <i class="fa-solid fa-video fa-3x"></i>
+        </div>
+        <h3 class="fw-bold text-white mb-2">Real-Time Video Counselling Room</h3>
+        <p class="text-muted w-75 mx-auto mb-4">
+          Open the dedicated full-screen live tracking room featuring real-time webcam face tracking, dynamic emotion bounding box HUD, real-time engagement telemetry gauge, and session notes recording.
+        </p>
+        <a href="{{ url_for('live_counselling') }}" class="glow-btn-primary py-3 px-5 fs-5">
+          <i class="fa-solid fa-arrow-up-right-from-square"></i> Launch Live Room Now
+        </a>
+      </div>
+
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="{{ url_for('static', filename='js/audio_recorder.js') }}"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  new AudioEmotionRecorder('startRecordBtn', 'stopRecordBtn', 'audioPlayer', 'recordTimer', 'audioBlobInput');
+});
+</script>
+{% endblock %}

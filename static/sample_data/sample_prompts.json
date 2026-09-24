@@ -1,0 +1,108 @@
+{
+  "multilingual_text": {
+    "malayalam": [
+      {
+        "text": "ഇന്നത്തെ സെഷനിൽ എനിക്ക് മനസ്സിന് വലിയ സമാധാനവും ശാന്തതയും തോന്നുന്നുണ്ട്.",
+        "label": "relax",
+        "translation": "In today's session, I feel great peace and tranquility in my mind."
+      },
+      {
+        "text": "എനിക്ക് അനിയന്റെ പെരുമാറ്റത്തിൽ ഭയങ്കര ദേഷ്യവും അമർഷവും വരുന്നുണ്ട്!",
+        "label": "angry",
+        "translation": "I feel extreme anger and frustration at my brother's behavior!"
+      },
+      {
+        "text": "ഞാൻ ഇന്ന് വളരെ സന്തോഷത്തിലാണ്, പുതിയ ജോലി ലഭിച്ചതിൽ വലിയ സന്തോഷം തോന്നുന്നു!",
+        "label": "happy",
+        "translation": "I am very happy today, feeling immense joy on getting the new job!"
+      },
+      {
+        "text": "എന്റെ ഉള്ളിൽ പഴയ വേദനയും സങ്കടവും കാരണം കണ്ണ് നിറയുന്നു, വല്ലാത്ത നിരാശയാണ്.",
+        "label": "sad",
+        "translation": "My eyes fill with tears due to past pain and sorrow, it is deep despair."
+      },
+      {
+        "text": "നമുക്ക് ഇത് പൊളിച്ചടുക്കാം! എനിക്ക് വലിയ ഊർജ്ജവും ഉന്മേഷവും തോന്നുന്നു!",
+        "label": "rock",
+        "translation": "We can rock this! I feel immense energy and motivation!"
+      },
+      {
+        "text": "എന്റെ പങ്കാളിയോട് എനിക്ക് വല്ലാത്ത സ്നേഹവും കരുണയും അടുപ്പവും തോന്നുന്നുണ്ട്.",
+        "label": "romantic",
+        "translation": "I feel deep love, tenderness, and closeness towards my partner."
+      },
+      {
+        "text": "ഇത് കേട്ട് ഞാൻ ശരിക്കും അത്ഭുതപ്പെട്ടു ഞെട്ടിപ്പോയി!",
+        "label": "surprise",
+        "translation": "Hearing this, I was genuinely astonished and shocked!"
+      }
+    ],
+    "hindi": [
+      {
+        "text": "आज की काउंसलिंग के बाद मेरा मन बहुत शांत और तनावमुक्त महसूस कर रहा है।",
+        "label": "relax",
+        "translation": "After today's counseling, my mind feels very peaceful and relaxed."
+      },
+      {
+        "text": "मुझे उस पुरानी घटना को याद करके बहुत गुस्सा और आक्रोश आता है!",
+        "label": "angry",
+        "translation": "I feel immense anger and rage remembering that past event!"
+      },
+      {
+        "text": "आज मैं अपने परिवार के साथ बहुत खुश और आनंदित महसूस कर रहा हूँ।",
+        "label": "happy",
+        "translation": "Today I am feeling very happy and blissful with my family."
+      },
+      {
+        "text": "अकेलेपन की वजह से दिल में बहुत गहरा दुख और उदासी छाई हुई है।",
+        "label": "sad",
+        "translation": "Due to loneliness, deep sadness and grief have enveloped my heart."
+      },
+      {
+        "text": "अब मैं पूरे जोश और उमंग के साथ इस नई चुनौती को रॉक करने को तैयार हूँ!",
+        "label": "rock",
+        "translation": "Now with full energy and passion I am ready to rock this challenge!"
+      },
+      {
+        "text": "उनके साथ बात करके मुझे बहुत अपनापन, प्यार और गहरा लगाव महसूस होता है।",
+        "label": "romantic",
+        "translation": "Talking with them, I feel immense warmth, love, and deep affection."
+      },
+      {
+        "text": "यह जानकर मुझे बहुत अचरज और हैरानी हुई, एकदम हैरान रह गया!",
+        "label": "surprise",
+        "translation": "Learning this astonished me completely, I was stunned!"
+      }
+    ],
+    "english": [
+      {
+        "text": "I feel remarkably calm, relaxed, and at ease during our conversation today.",
+        "label": "relax"
+      },
+      {
+        "text": "I feel furious and annoyed that my boundaries were completely ignored!",
+        "label": "angry"
+      },
+      {
+        "text": "I am so joyful and delighted with the breakthrough we made in this session.",
+        "label": "happy"
+      },
+      {
+        "text": "I have been feeling deeply sad, hopeless, and crying myself to sleep lately.",
+        "label": "sad"
+      },
+      {
+        "text": "I feel pumped, passionate, and energetic to take massive action this week!",
+        "label": "rock"
+      },
+      {
+        "text": "I experience deep affection, tenderness, and warmth whenever we connect.",
+        "label": "romantic"
+      },
+      {
+        "text": "I am completely stunned and surprised by this unexpected realization!",
+        "label": "surprise"
+      }
+    ]
+  }
+}

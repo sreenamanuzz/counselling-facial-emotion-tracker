@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="300" height="300">
+  <defs>
+    <radialGradient id="romanticGrad" cx="50%" cy="45%" r="50%">
+      <stop offset="0%" stop-color="#fce7f3" />
+      <stop offset="100%" stop-color="#f472b6" />
+    </radialGradient>
+  </defs>
+  <rect width="100%" height="100%" fill="#1e1e2d" rx="20"/>
+  <circle cx="150" cy="150" r="105" fill="url(#romanticGrad)" stroke="#ec4899" stroke-width="4"/>
+  <!-- Gentle Empathetic Brows -->
+  <path d="M 85 116 Q 110 110 135 120" stroke="#831843" stroke-width="4" fill="none" stroke-linecap="round" />
+  <path d="M 165 120 Q 190 110 215 116" stroke="#831843" stroke-width="4" fill="none" stroke-linecap="round" />
+  <!-- Warm Tender Heart Pupils -->
+  <path d="M 105 138 C 105 132, 97 132, 97 140 C 97 148, 105 154, 105 156 C 105 154, 113 148, 113 140 C 113 132, 105 132, 105 138 Z" fill="#831843" />
+  <path d="M 195 138 C 195 132, 187 132, 187 140 C 187 148, 195 154, 195 156 C 195 154, 203 148, 203 140 C 203 132, 195 132, 195 138 Z" fill="#831843" />
+  <!-- Rosy Blushing Cheeks -->
+  <circle cx="82" cy="168" r="16" fill="#be185d" opacity="0.4" />
+  <circle cx="218" cy="168" r="16" fill="#be185d" opacity="0.4" />
+  <!-- Soft Sweet Smile -->
+  <path d="M 118 192 Q 150 216 182 192" stroke="#831843" stroke-width="5" fill="none" stroke-linecap="round" />
+  <text x="150" y="280" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#f472b6" text-anchor="middle">EMOTION: ROMANTIC / EMPATHY</text>
+</svg>

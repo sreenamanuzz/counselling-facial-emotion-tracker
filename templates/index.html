@@ -1,0 +1,204 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Facial Expression Tracking for Video Based Counselling Engagement{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <!-- Hero Section -->
+  <div class="row align-items-center mb-5">
+    <div class="col-lg-7">
+      <div class="badge bg-primary bg-opacity-25 text-info border border-primary px-3 py-2 rounded-pill mb-3">
+        <i class="fa-solid fa-sparkles me-1"></i> Multi-Modal Emotion &amp; Engagement Intelligence
+      </div>
+      <h1 class="display-5 fw-bold mb-3 text-white" style="letter-spacing: -1px; line-height: 1.2;">
+        Facial Expression Tracking for <br>
+        <span style="background: linear-gradient(135deg, #38bdf8, #818cf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+          Video Based Counselling Engagement
+        </span>
+      </h1>
+      <p class="lead text-muted mb-4" style="font-size: 1.1rem;">
+        An advanced clinical tele-therapy monitoring platform that tracks facial micro-expressions, speech prosody, and multilingual client dialog (Malayalam, English, Hindi) in real time to quantify therapeutic rapport, detect emotional shifts, and deliver explainable clinical insights.
+      </p>
+
+      <!-- Target Emotion Showcase -->
+      <div class="mb-4">
+        <div class="text-white-50 small text-uppercase fw-bold mb-2">Detected 7 Core Counseling Emotions:</div>
+        <div class="d-flex flex-wrap gap-2">
+          <span class="badge-emotion badge-angry"><i class="fa-solid fa-fire"></i> Angry</span>
+          <span class="badge-emotion badge-happy"><i class="fa-solid fa-face-smile"></i> Happy</span>
+          <span class="badge-emotion badge-relax"><i class="fa-solid fa-spa"></i> Relax</span>
+          <span class="badge-emotion badge-rock"><i class="fa-solid fa-bolt"></i> Rock</span>
+          <span class="badge-emotion badge-romantic"><i class="fa-solid fa-heart"></i> Romantic</span>
+          <span class="badge-emotion badge-sad"><i class="fa-solid fa-face-sad-tear"></i> Sad</span>
+          <span class="badge-emotion badge-surprise"><i class="fa-solid fa-bolt-lightning"></i> Surprise</span>
+        </div>
+      </div>
+
+      <div class="d-flex flex-wrap gap-3">
+        <a href="{{ url_for('live_counselling') }}" class="glow-btn-primary">
+          <i class="fa-solid fa-video"></i> Launch Live Counselling Room
+        </a>
+        <a href="{{ url_for('upload_page') }}" class="glow-btn-secondary">
+          <i class="fa-solid fa-cloud-arrow-up"></i> Multi-Modal Upload
+        </a>
+        <a href="{{ url_for('evaluation') }}" class="glow-btn-secondary">
+          <i class="fa-solid fa-chart-line"></i> Model Evaluation
+        </a>
+      </div>
+    </div>
+
+    <!-- Quick Stats & Visual Card -->
+    <div class="col-lg-5 mt-5 mt-lg-0">
+      <div class="glass-card p-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h5 class="fw-bold text-white mb-0"><i class="fa-solid fa-chart-pie text-info me-2"></i> Session Telemetry</h5>
+          <span class="badge bg-success bg-opacity-25 text-success border border-success">Live Engine</span>
+        </div>
+
+        <div class="row g-3 mb-4">
+          <div class="col-6">
+            <div class="stat-box">
+              <div class="stat-value">{{ stats.total_sessions }}</div>
+              <div class="stat-label">Counselling Sessions</div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="stat-box">
+              <div class="stat-value">{{ stats.avg_engagement }}%</div>
+              <div class="stat-label">Avg Engagement</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-3 rounded-3" style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--border-color);">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <span class="text-muted small">Top Active Model</span>
+            <span class="badge bg-primary">CNN + Conformer (93.7% Acc)</span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <span class="text-muted small">Explainability Status</span>
+            <span class="text-success small fw-bold"><i class="fa-solid fa-check me-1"></i> SHAP &amp; Grad-CAM Active</span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="text-muted small">Supported Dialects</span>
+            <span class="text-info small fw-bold">Malayalam &bull; English &bull; Hindi</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- System Architecture & Capabilities -->
+  <div class="row g-4 mb-5">
+    <div class="col-12 text-center mb-2">
+      <h3 class="fw-bold text-white">Comprehensive System Architecture</h3>
+      <p class="text-muted">Built for rigorous psychological counseling analysis with state-of-the-art AI</p>
+    </div>
+
+    <!-- Modality Card -->
+    <div class="col-md-4">
+      <div class="glass-card p-4 h-100">
+        <div class="d-inline-flex p-3 rounded-3 mb-3" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8;">
+          <i class="fa-solid fa-sliders fa-xl"></i>
+        </div>
+        <h5 class="fw-bold text-white mb-2">Multi-Modal Inputs</h5>
+        <p class="text-muted small mb-3">
+          Seamlessly ingest video/webcam facial expressions, audio speech intonation, and client transcripts in <strong>Malayalam (മലയാളം)</strong>, <strong>Hindi (हिन्दी)</strong>, and <strong>English</strong>.
+        </p>
+        <ul class="list-unstyled text-muted small">
+          <li><i class="fa-solid fa-check text-info me-2"></i> Facial Action Units (AU1, AU4, AU12, etc.)</li>
+          <li><i class="fa-solid fa-check text-info me-2"></i> Speech Pitch (F0) &amp; Energy Envelope</li>
+          <li><i class="fa-solid fa-check text-info me-2"></i> Multilingual Sentiment &amp; Valence Lexicon</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Algorithm Card -->
+    <div class="col-md-4">
+      <div class="glass-card p-4 h-100">
+        <div class="d-inline-flex p-3 rounded-3 mb-3" style="background: rgba(129, 140, 248, 0.15); color: #818cf8;">
+          <i class="fa-solid fa-network-wired fa-xl"></i>
+        </div>
+        <h5 class="fw-bold text-white mb-2">5 Benchmark Algorithms</h5>
+        <p class="text-muted small mb-3">
+          Directly evaluate and switch between modern machine learning and deep learning architectures:
+        </p>
+        <div class="d-flex flex-wrap gap-2">
+          <span class="badge bg-secondary">Random Forest</span>
+          <span class="badge bg-secondary">XGBoost</span>
+          <span class="badge bg-secondary">CRNN with Attention</span>
+          <span class="badge bg-info text-dark">CNN + Conformer</span>
+          <span class="badge bg-primary">YOLOv12 / CV</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- XAI Card -->
+    <div class="col-md-4">
+      <div class="glass-card p-4 h-100">
+        <div class="d-inline-flex p-3 rounded-3 mb-3" style="background: rgba(236, 72, 153, 0.15); color: #ec4899;">
+          <i class="fa-solid fa-eye fa-xl"></i>
+        </div>
+        <h5 class="fw-bold text-white mb-2">Explainable AI (XAI)</h5>
+        <p class="text-muted small mb-3">
+          Clinical transparency is paramount. The system explains predictions visually and mathematically:
+        </p>
+        <ul class="list-unstyled text-muted small">
+          <li><i class="fa-solid fa-check text-pink me-2"></i> <strong>Grad-CAM</strong> heatmaps highlighting eye/mouth/brow muscles</li>
+          <li><i class="fa-solid fa-check text-pink me-2"></i> <strong>SHAP</strong> game-theoretic waterfall attributions</li>
+          <li><i class="fa-solid fa-check text-pink me-2"></i> Automated Counselor Intervention Protocols</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Recent Sessions History -->
+  {% if recent_sessions %}
+  <div class="glass-card p-4 mb-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h5 class="fw-bold text-white mb-0"><i class="fa-solid fa-clock-rotate-left text-info me-2"></i> Recent Counselling Evaluations</h5>
+      <a href="{{ url_for('upload_page') }}" class="btn btn-sm btn-outline-info rounded-pill">New Session</a>
+    </div>
+    <div class="table-responsive">
+      <table class="table table-dark table-hover mb-0" style="background: transparent;">
+        <thead>
+          <tr class="text-muted small">
+            <th>ID</th>
+            <th>Type</th>
+            <th>Detected Emotion</th>
+            <th>Confidence</th>
+            <th>Engagement Index</th>
+            <th>Model</th>
+            <th>Timestamp</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for rec in recent_sessions %}
+          <tr>
+            <td>#{{ rec.id }}</td>
+            <td><span class="badge bg-secondary text-uppercase">{{ rec.input_type }}</span></td>
+            <td><span class="badge-emotion badge-{{ rec.predicted_emotion }}">{{ rec.predicted_emotion }}</span></td>
+            <td>{{ rec.confidence }}%</td>
+            <td>
+              <div class="d-flex align-items-center gap-2">
+                <div class="progress flex-grow-1" style="height: 6px; background: rgba(255,255,255,0.1); width: 80px;">
+                  <div class="progress-bar bg-info" style="width: {{ rec.engagement_score }}%;"></div>
+                </div>
+                <span class="small fw-bold">{{ rec.engagement_score }}%</span>
+              </div>
+            </td>
+            <td><span class="badge bg-dark border border-secondary">{{ rec.model_name }}</span></td>
+            <td class="text-muted small">{{ rec.created_at }}</td>
+            <td>
+              <a href="{{ url_for('view_session', record_id=rec.id) }}" class="btn btn-sm btn-outline-light py-0 px-2">View</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

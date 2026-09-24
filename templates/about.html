@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}About - Facial Expression Tracking for Video Based Counselling Engagement{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-10">
+      
+      <!-- Abstract Header -->
+      <div class="glass-card p-4 p-md-5 mb-4">
+        <div class="badge bg-primary bg-opacity-25 text-info border border-primary px-3 py-1 rounded-pill mb-3">
+          <i class="fa-solid fa-graduation-cap me-1"></i> Scientific Abstract &amp; Research Scope
+        </div>
+        <h2 class="fw-bold text-white mb-3">
+          Facial Expression Tracking for Video Based Counselling Engagement
+        </h2>
+        <div class="p-4 rounded-3 mb-4" style="background: rgba(15, 23, 42, 0.7); border-left: 4px solid var(--secondary);">
+          <h5 class="fw-bold text-white mb-2">Abstract</h5>
+          <p class="text-muted mb-0" style="line-height: 1.8;">
+            Facial emotion recognition is an important application of machine learning and computer vision, with potential uses in security systems, mental health monitoring, and human-computer interaction. This work presents a multi-modal Convolutional Neural Network (CNN) and Conformer-based approach for recognizing human emotions from facial expressions and conversational cues during video-based tele-counseling. The system utilizes the <strong>AffectNet</strong> facial expression dataset and video counseling engagement corpus containing images representing seven major emotional states: <strong>angry, happy, relax, rock, romantic, sad, and surprise</strong>. The pipeline pre-processes visual frames via grayscale normalization, resizing, facial landmark extraction, and spatial-temporal modeling, supplemented by speech acoustic analysis and multilingual transcript interpretation in <strong>Malayalam, English, and Hindi</strong>. Integrated Explainable AI (SHAP and Grad-CAM) provides transparency for clinical practitioners, supporting objective therapeutic alliance tracking and actionable counseling engagement interventions.
+          </p>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-md-6">
+            <h5 class="fw-bold text-white mb-2"><i class="fa-solid fa-shield-heart text-info me-2"></i> Clinical Purpose &amp; Value</h5>
+            <p class="text-muted small">
+              In tele-mental health and video-based psychotherapy, counselors often experience perceptual fatigue or miss fleeting micro-expressions. This system acts as an unintrusive clinical companion, providing objective real-time indicators of client arousal, emotional breakthroughs, or withdrawal.
+            </p>
+          </div>
+          <div class="col-md-6">
+            <h5 class="fw-bold text-white mb-2"><i class="fa-solid fa-user-shield text-success me-2"></i> Ethics &amp; Patient Privacy</h5>
+            <p class="text-muted small">
+              The application operates strictly under clinical consent protocols. Real-time video processing is performed in-session with no unauthorized cloud retention, and data points are mapped to evidence-based psychological recommendations (e.g. Cognitive Behavioral Therapy, somatic grounding, de-escalation).
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Algorithms Detailed -->
+      <div class="glass-card p-4 p-md-5 mb-4">
+        <h4 class="fw-bold text-white mb-4">
+          <i class="fa-solid fa-layer-group text-info me-2"></i> Implemented Algorithms &amp; Technologies
+        </h4>
+        <div class="row g-4">
+          <div class="col-md-6">
+            <div class="p-3 rounded-3 h-100" style="background: rgba(15, 23, 42, 0.6); border: 1px solid var(--border-color);">
+              <h6 class="fw-bold text-white mb-1"><i class="fa-solid fa-tree text-success me-2"></i> Random Forest &amp; XGBoost</h6>
+              <p class="text-muted small mb-0">
+                Robust tree-based ensembles trained on extracted facial action units, geometric aspect ratios (EAR, MAR), and acoustic MFCC speech features. Yields high interpretability and quick inference.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="p-3 rounded-3 h-100" style="background: rgba(15, 23, 42, 0.6); border: 1px solid var(--border-color);">
+              <h6 class="fw-bold text-white mb-1"><i class="fa-solid fa-arrows-split-up-and-left text-info me-2"></i> CRNN with Attention</h6>
+              <p class="text-muted small mb-0">
+                A Convolutional Recurrent Neural Network with temporal self-attention. CNN feature extractors process video frames, while Bi-directional GRU layers capture temporal evolution and emotional shifts throughout counseling sessions.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="p-3 rounded-3 h-100" style="background: rgba(15, 23, 42, 0.6); border: 1px solid var(--border-color);">
+              <h6 class="fw-bold text-white mb-1"><i class="fa-solid fa-microchip text-primary me-2"></i> CNN + Conformer</h6>
+              <p class="text-muted small mb-0">
+                Combines convolution layers for localized micro-expression features with Transformer Multi-Head Self-Attention for global context, reaching a state-of-the-art 93.7% accuracy on benchmark tests.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="p-3 rounded-3 h-100" style="background: rgba(15, 23, 42, 0.6); border: 1px solid var(--border-color);">
+              <h6 class="fw-bold text-white mb-1"><i class="fa-solid fa-eye text-warning me-2"></i> Explainable AI: SHAP &amp; Grad-CAM</h6>
+              <p class="text-muted small mb-0">
+                Grad-CAM renders visual attention heatmaps over facial musculature, while SHAP computes exact Shapley attributions, ensuring practitioners know precisely why an emotion was detected.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+{% endblock %}

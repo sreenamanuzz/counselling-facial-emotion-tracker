@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="300" height="300">
+  <defs>
+    <radialGradient id="surpriseGrad" cx="50%" cy="45%" r="50%">
+      <stop offset="0%" stop-color="#ede9fe" />
+      <stop offset="100%" stop-color="#c4b5fd" />
+    </radialGradient>
+  </defs>
+  <rect width="100%" height="100%" fill="#1e1e2d" rx="20"/>
+  <circle cx="150" cy="150" r="105" fill="url(#surpriseGrad)" stroke="#8b5cf6" stroke-width="4"/>
+  <!-- High Raised Arched Eyebrows (AU1 + AU2) -->
+  <path d="M 80 102 Q 108 80 135 102" stroke="#4c1d95" stroke-width="5" fill="none" stroke-linecap="round" />
+  <path d="M 165 102 Q 192 80 220 102" stroke="#4c1d95" stroke-width="5" fill="none" stroke-linecap="round" />
+  <!-- Wide Round Ocular Aperture (AU5) -->
+  <circle cx="108" cy="142" r="18" fill="#ffffff" stroke="#4c1d95" stroke-width="3"/>
+  <circle cx="108" cy="142" r="8" fill="#4c1d95"/>
+  <circle cx="192" cy="142" r="18" fill="#ffffff" stroke="#4c1d95" stroke-width="3"/>
+  <circle cx="192" cy="142" r="8" fill="#4c1d95"/>
+  <!-- Open O-Shaped Mandible (AU26 / AU27) -->
+  <ellipse cx="150" cy="208" rx="22" ry="28" fill="#4c1d95"/>
+  <ellipse cx="150" cy="214" rx="14" ry="16" fill="#f43f5e" opacity="0.8"/>
+  <text x="150" y="280" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#a78bfa" text-anchor="middle">EMOTION: SURPRISE (AU1+AU2+AU5)</text>
+</svg>

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="300" height="300">
+  <defs>
+    <radialGradient id="happyGrad" cx="50%" cy="45%" r="50%">
+      <stop offset="0%" stop-color="#dcfce7" />
+      <stop offset="100%" stop-color="#86efac" />
+    </radialGradient>
+  </defs>
+  <rect width="100%" height="100%" fill="#1e1e2d" rx="20"/>
+  <circle cx="150" cy="150" r="105" fill="url(#happyGrad)" stroke="#22c55e" stroke-width="4"/>
+  <!-- Happy Arched Brows -->
+  <path d="M 85 118 Q 110 102 135 118" stroke="#14532d" stroke-width="5" fill="none" stroke-linecap="round" />
+  <path d="M 165 118 Q 190 102 215 118" stroke="#14532d" stroke-width="5" fill="none" stroke-linecap="round" />
+  <!-- Crinkled Joyful Eyes (Orbicularis AU6) -->
+  <path d="M 92 145 Q 110 130 128 145" stroke="#14532d" stroke-width="6" fill="none" stroke-linecap="round" />
+  <path d="M 172 145 Q 190 130 208 145" stroke="#14532d" stroke-width="6" fill="none" stroke-linecap="round" />
+  <!-- Rosy Cheeks -->
+  <circle cx="85" cy="165" r="14" fill="#f87171" opacity="0.4" />
+  <circle cx="215" cy="165" r="14" fill="#f87171" opacity="0.4" />
+  <!-- Broad Smile (Zygomaticus AU12) -->
+  <path d="M 95 180 Q 150 245 205 180 Z" fill="#14532d" stroke="#14532d" stroke-width="3" stroke-linejoin="round"/>
+  <!-- White Teeth -->
+  <path d="M 105 183 Q 150 205 195 183 Q 150 188 105 183" fill="#ffffff" />
+  <text x="150" y="280" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#4ade80" text-anchor="middle">EMOTION: HAPPY (AU6+AU12)</text>
+</svg>

@@ -1,0 +1,43 @@
+sample_id,modality,language,emotion,transcript_or_description,facial_au_brow_furrow_au4,facial_au_eye_aperture_ear,facial_au_smile_curvature_au12,facial_au_mouth_downturn_au15,facial_au_jaw_tension_au26,acoustic_pitch_f0_hz,acoustic_energy_rms,acoustic_tempo_wpm,counselling_engagement_index,clinical_urgency
+ENG-1001,video_frame,en,relax,"I feel calm and at ease during our counseling dialogue.",0.18,0.48,0.25,0.12,0.15,145.2,0.35,112,94.5,Optimal Processing
+ENG-1002,text,ml,relax,"ഇന്നത്തെ സെഷനിൽ എനിക്ക് മനസ്സിന് വലിയ സമാധാനവും ശാന്തതയും തോന്നുന്നുണ്ട്.",0.14,0.52,0.28,0.10,0.12,138.6,0.32,108,95.0,Optimal Processing
+ENG-1003,text,hi,relax,"आज की काउंसलिंग के बाद मेरा मन बहुत शांत और तनावमुक्त महसूस कर रहा है।",0.16,0.50,0.26,0.14,0.16,142.1,0.34,115,93.8,Optimal Processing
+ENG-1004,audio,en,relax,"My breathing is steady and I feel safe in this space.",0.15,0.49,0.24,0.11,0.14,140.0,0.31,105,94.2,Optimal Processing
+ENG-1005,video_frame,ml,relax,"ധ്യാനവും വിശ്രമ വ്യായാമങ്ങളും എന്നെ വളരെയധികം സഹായിക്കുന്നുണ്ട്.",0.17,0.51,0.27,0.13,0.15,144.5,0.36,110,95.4,Optimal Processing
+ENG-1006,text,hi,relax,"मुझे अपने अंदर एक सुकून और संतुलन महसूस हो रहा है।",0.13,0.53,0.30,0.09,0.11,136.2,0.30,106,96.1,Optimal Processing
+ENG-1007,video_frame,en,angry,"I feel so furious and irritated by how I was treated!",0.88,0.42,0.08,0.72,0.85,285.4,0.88,175,42.5,Immediate De-escalation
+ENG-1008,text,ml,angry,"എനിക്ക് അനിയന്റെ പെരുമാറ്റത്തിൽ ഭയങ്കര ദേഷ്യവും അമർഷവും വരുന്നുണ്ട്!",0.92,0.38,0.05,0.78,0.90,292.1,0.92,182,39.8,Immediate De-escalation
+ENG-1009,text,hi,angry,"मुझे उस पुरानी घटना को याद करके बहुत गुस्सा और आक्रोश आता है!",0.86,0.40,0.09,0.70,0.82,280.6,0.85,170,43.2,Immediate De-escalation
+ENG-1010,audio,en,angry,"Everything makes me angry and I feel like yelling.",0.89,0.41,0.06,0.75,0.88,288.9,0.90,178,41.0,Immediate De-escalation
+ENG-1011,video_frame,ml,angry,"ആ പഴയ ചതി ഓർക്കുമ്പോൾ എനിക്ക് സ്വയം നിയന്ത്രിക്കാൻ കഴിയുന്നില്ല.",0.94,0.36,0.04,0.82,0.92,298.5,0.95,185,38.5,Immediate De-escalation
+ENG-1012,text,hi,angry,"जब कोई मेरी सीमाओं का अनादर करता है तो मुझे बहुत चिढ़ होती है।",0.85,0.43,0.10,0.68,0.80,276.4,0.82,168,44.0,Immediate De-escalation
+ENG-1013,video_frame,en,happy,"I am so joyful and delighted with the progress I made this week!",0.12,0.58,0.85,0.05,0.22,242.8,0.72,160,91.8,Positive Reinforcement
+ENG-1014,text,ml,happy,"ഞാൻ ഇന്ന് വളരെ സന്തോഷത്തിലാണ്, പുതിയ ജോലി ലഭിച്ചതിൽ വലിയ സന്തോഷം തോന്നുന്നു!",0.10,0.60,0.88,0.04,0.20,248.5,0.75,165,92.5,Positive Reinforcement
+ENG-1015,text,hi,happy,"आज मैं अपने परिवार के साथ बहुत खुश और आनंदित महसूस कर रहा हूँ।",0.14,0.56,0.82,0.06,0.24,238.2,0.70,158,91.2,Positive Reinforcement
+ENG-1016,audio,en,happy,"We had a wonderful breakthrough in our therapy session.",0.11,0.59,0.86,0.04,0.21,245.0,0.73,162,93.0,Positive Reinforcement
+ENG-1017,video_frame,ml,happy,"കുടുംബത്തോടൊപ്പം ചെലവഴിച്ച സമയം മനസ്സിന് വലിയ ഉല്ലാസം നൽകി.",0.09,0.62,0.90,0.03,0.18,252.1,0.76,168,93.8,Positive Reinforcement
+ENG-1018,text,hi,happy,"मेरा दिल खुशी से झूम रहा है, सब कुछ बहुत अच्छा लग रहा है।",0.13,0.57,0.84,0.05,0.23,240.4,0.71,159,91.5,Positive Reinforcement
+ENG-1019,video_frame,en,sad,"I feel deeply heartbroken, hopeless, and crying constantly.",0.78,0.34,0.05,0.88,0.52,118.4,0.24,88,52.5,Empathetic Holding
+ENG-1020,text,ml,sad,"എന്റെ ഉള്ളിൽ പഴയ വേദനയും സങ്കടവും കാരണം കണ്ണ് നിറയുന്നു, വല്ലാത്ത നിരാശയാണ്.",0.82,0.30,0.03,0.92,0.56,112.0,0.20,82,49.8,Empathetic Holding
+ENG-1021,text,hi,sad,"अकेलेपन की वजह से दिल में बहुत गहरा दुख और उदासी छाई हुई है।",0.76,0.36,0.06,0.85,0.50,122.5,0.26,92,54.0,Empathetic Holding
+ENG-1022,audio,en,sad,"I struggle to find meaning and feel weighed down by sorrow.",0.79,0.33,0.04,0.89,0.54,116.2,0.22,85,51.2,Empathetic Holding
+ENG-1023,video_frame,ml,sad,"ആരും കൂടെയില്ലാത്തതുപോലെ വലിയ ഏകാന്തതയും ദുഃഖവും അനുഭവപ്പെടുന്നു.",0.84,0.28,0.02,0.95,0.58,108.7,0.18,78,48.0,Empathetic Holding
+ENG-1024,text,hi,sad,"जीवन में गहरी मायूसी और निराशा महसूस हो रही है।",0.75,0.38,0.07,0.82,0.48,125.0,0.28,95,55.5,Empathetic Holding
+ENG-1025,video_frame,en,rock,"I feel totally empowered, energized, and ready to conquer my challenges!",0.58,0.82,0.68,0.08,0.80,315.6,0.94,188,93.2,Positive Reinforcement
+ENG-1026,text,ml,rock,"നമുക്ക് ഇത് പൊളിച്ചടുക്കാം! എനിക്ക് വലിയ ഊർജ്ജവും ഉന്മേഷവും തോന്നുന്നു!",0.62,0.85,0.72,0.06,0.84,324.0,0.96,195,94.5,Positive Reinforcement
+ENG-1027,text,hi,rock,"अब मैं पूरे जोश और उमंग के साथ इस नई चुनौती को रॉक करने को तैयार हूँ!",0.55,0.80,0.65,0.10,0.78,308.2,0.92,182,92.0,Positive Reinforcement
+ENG-1028,audio,en,rock,"This was an incredible breakthrough session, I feel unstoppable!",0.60,0.83,0.70,0.07,0.82,318.5,0.95,190,93.8,Positive Reinforcement
+ENG-1029,video_frame,ml,rock,"എന്റെ ലക്ഷ്യങ്ങൾ നേടാൻ ഞാൻ പൂർണ്ണ സജ്ജനാണ്, ഭയം മാറിപ്പോയി.",0.64,0.86,0.75,0.05,0.86,328.7,0.98,198,95.0,Positive Reinforcement
+ENG-1030,text,hi,rock,"यह सेशन बहुत धमाकेदार रहा, मुझे अपने अंदर असीम ऊर्जा महसूस हो रही है!",0.54,0.78,0.62,0.11,0.76,305.0,0.90,180,91.5,Positive Reinforcement
+ENG-1031,video_frame,en,romantic,"I feel deep warmth, tenderness, and affectionate connection.",0.12,0.62,0.58,0.08,0.18,162.4,0.42,120,89.5,Optimal Processing
+ENG-1032,text,ml,romantic,"എന്റെ പങ്കാളിയോട് എനിക്ക് വല്ലാത്ത സ്നേഹവും കരുണയും അടുപ്പവും തോന്നുന്നുണ്ട്.",0.10,0.65,0.62,0.06,0.15,158.0,0.38,115,90.8,Optimal Processing
+ENG-1033,text,hi,romantic,"उनके साथ बात करके मुझे बहुत अपनापन, प्यार और गहरा लगाव महसूस होता है।",0.14,0.59,0.55,0.10,0.20,166.5,0.45,124,88.4,Optimal Processing
+ENG-1034,audio,en,romantic,"My heart feels open and I cherish the loving bond we share.",0.11,0.63,0.60,0.07,0.17,160.2,0.40,118,90.0,Optimal Processing
+ENG-1035,video_frame,ml,romantic,"വാത്സല്യവും കരുണയും നിറഞ്ഞ ഒരു അന്തരീക്ഷം എനിക്ക് സുരക്ഷിതത്വം നൽകുന്നു.",0.09,0.66,0.64,0.05,0.14,155.8,0.36,112,91.5,Optimal Processing
+ENG-1036,text,hi,romantic,"मेरे दिल में बहुत नरमी, स्नेह और प्यार का एहसास है।",0.13,0.60,0.56,0.09,0.19,164.0,0.43,122,89.0,Optimal Processing
+ENG-1037,video_frame,en,surprise,"I am completely astonished and surprised by this sudden realization!",0.08,0.94,0.28,0.14,0.32,328.5,0.84,168,73.5,Optimal Processing
+ENG-1038,text,ml,surprise,"ഇത് കേട്ട് ഞാൻ ശരിക്കും അത്ഭുതപ്പെട്ടു ഞെട്ടിപ്പോയി!",0.06,0.96,0.30,0.12,0.30,336.0,0.86,172,74.8,Optimal Processing
+ENG-1039,text,hi,surprise,"यह जानकर मुझे बहुत अचरज और हैरानी हुई, एकदम हैरान रह गया!",0.10,0.92,0.25,0.16,0.35,322.0,0.81,164,72.0,Optimal Processing
+ENG-1040,audio,en,surprise,"Wow, I never looked at my cognitive distortions from that angle before!",0.07,0.95,0.29,0.13,0.31,332.1,0.85,170,74.0,Optimal Processing
+ENG-1041,video_frame,ml,surprise,"പെട്ടെന്ന് ഉണ്ടായ ആ അപ്രതീക്ഷിത മാറ്റം എന്നെ ശരിക്കും അമ്പരപ്പിച്ചു.",0.05,0.97,0.32,0.11,0.28,340.5,0.88,176,75.5,Optimal Processing
+ENG-1042,text,hi,surprise,"उस अचानक हुए खुलासे ने मुझे पूरी तरह से चौंका दिया।",0.09,0.93,0.26,0.15,0.33,325.4,0.82,166,72.8,Optimal Processing
